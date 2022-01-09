@@ -1,12 +1,12 @@
 import { AppProps } from 'next/app';
-import { GeistProvider, CssBaseline, Themes } from '@geist-ui/react';
+import { Provider } from 'react-redux';
+import Store from '../store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <GeistProvider themeType="dark">
-      <CssBaseline />
+    <Provider store={Store}>
       <Component {...pageProps} />
-    </GeistProvider>
+    </Provider>
   );
 }
 
