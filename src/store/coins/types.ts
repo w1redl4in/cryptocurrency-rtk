@@ -5,6 +5,7 @@ export interface Coin {
   };
   coins: [
     {
+      uuid: string;
       iconUrl: string;
       price: number;
       color: string;
