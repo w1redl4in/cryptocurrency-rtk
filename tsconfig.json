@@ -3,11 +3,17 @@
     "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
-      "@/components/*": [
+      "@components/*": [
         "components/*"
       ],
-      "@/styles/*": [
+      "@styles/*": [
         "styles/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@store/*": [
+        "store/*"
       ],
     },
     "target": "es5",
