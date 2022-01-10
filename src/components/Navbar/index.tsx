@@ -1,4 +1,11 @@
-import { Text, Tabs, Display, Image, Page } from '@geist-ui/react';
+import {
+  Text,
+  Tabs,
+  Display,
+  Image,
+  Page,
+  useMediaQuery,
+} from '@geist-ui/react';
 import { Dashboard } from '@components/Dashboard';
 import { ToggleTheme } from './ToggleTheme';
 import { Cryptocurrencies } from '@components/Cryptocurrencies';
@@ -32,11 +39,13 @@ export const Navbar = () => {
   ];
 
   return (
-    <Page.Header>
-      <ToggleTheme />
-      <Display caption={<Text h2>CryptoVerse</Text>}>
-        <Image width="100px" src="/nft.svg" alt="nft image" />
-      </Display>
+    <>
+      <Page.Header>
+        <ToggleTheme />
+        <Display caption={<Text h2>CryptoVerse</Text>}>
+          <Image width="100px" src="/nft.svg" alt="nft image" />
+        </Display>
+      </Page.Header>
       <Tabs hideDivider initialValue="Dashboard">
         {tabs.map((tab) => (
           <Tabs.Item
@@ -49,6 +58,6 @@ export const Navbar = () => {
           </Tabs.Item>
         ))}
       </Tabs>
-    </Page.Header>
+    </>
   );
 };
