@@ -12,7 +12,7 @@ import {
 import { useCoinModal } from '@hooks/coins/useCoinModal';
 import { useGetCryptoQuery } from '@services/endpoints';
 export const PageContent = () => {
-  const { isFetching, data } = useGetCryptoQuery('');
+  const { isFetching, data } = useGetCryptoQuery();
 
   const { handleOpenCoinModal } = useCoinModal();
 

@@ -9,11 +9,13 @@ const cryptoApiHeaders = {
 const baseUrl = 'https://coinranking1.p.rapidapi.com';
 
 const createRequest = (url: string) => ({ url, headers: cryptoApiHeaders });
+
+// transformResponse: (response: { data: Post }, meta, arg) => response.data,
 export const getCoins = createApi({
   reducerPath: 'getCoins',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCrypto: builder.query<{ data: Coin }, string>({
+    getCrypto: builder.query<{ data: Coin }, void>({
       query: () => createRequest('/coins'),
     }),
   }),
