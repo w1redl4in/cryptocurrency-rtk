@@ -2,6 +2,7 @@ import { Text, Tabs, Display, Image, Page } from '@geist-ui/react';
 import { Dashboard } from '@components/Dashboard';
 import { ToggleTheme } from './ToggleTheme';
 import { Cryptocurrencies } from '@components/Cryptocurrencies';
+import { Exchanges } from '@components/Exchanges';
 
 export const Navbar = () => {
   const tabs = [
@@ -20,7 +21,8 @@ export const Navbar = () => {
     {
       label: 'Exchanges',
       value: 'Exchanges',
-      disabled: true,
+      Component: Exchanges,
+      disabled: false,
     },
     {
       label: 'News',
