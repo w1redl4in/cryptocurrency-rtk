@@ -1,24 +1,27 @@
-import { Modal } from '@geist-ui/react';
-import { closeModal } from '@store/coins/slice';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { Loading, Modal } from '@geist-ui/react';
+import { useCoinModal } from '@hooks/coins/useCoinModal';
 export const CoinModal = () => {
-  const { coinDetailsModalIsOpen } = useSelector((state: any) => state.coin);
+  const { coinDetailsModalIsOpen, handleCloseCoinModal, coin } = useCoinModal();
 
-  const dispatch = useDispatch();
+  const { isFetching, data } = coin;
+
+  console.log('coin', isFetching, data);
 
   return (
-    <Modal
-      visible={coinDetailsModalIsOpen}
-      onClose={() => dispatch(closeModal())}
-    >
-      <Modal.Title>Nome da moeda</Modal.Title>
-      <Modal.Subtitle>Info da moeda</Modal.Subtitle>
-      <Modal.Content>Informações detalhadas</Modal.Content>
-      <Modal.Action>Submit</Modal.Action>
-      <Modal.Action passive onClick={() => dispatch(closeModal())}>
-        Cancel
-      </Modal.Action>
+    <Modal visible={coinDetailsModalIsOpen} onClose={handleCloseCoinModal}>
+      {isFetching ? (
+        <Loading />
+      ) : (
+        <>
+          <Modal.Title>Nome da moeda</Modal.Title>
+          <Modal.Subtitle>Info da moeda</Modal.Subtitle>
+          <Modal.Content>Informações detalhadas</Modal.Content>
+          <Modal.Action>Submit</Modal.Action>
+          <Modal.Action passive onClick={handleCloseCoinModal}>
+            Cancel
+          </Modal.Action>
+        </>
+      )}
     </Modal>
   );
 };

@@ -9,12 +9,12 @@ import {
   Spacer,
   Button,
 } from '@geist-ui/react';
-import { useGetCryptoQuery } from '@services/cryptoApi';
-import { openModal } from '@store/coins/slice';
-import { useDispatch } from 'react-redux';
+import { useCoinModal } from '@hooks/coins/useCoinModal';
+import { useGetCryptoQuery } from '@services/endpoints';
 export const PageContent = () => {
-  const dispatch = useDispatch();
   const { isFetching, data } = useGetCryptoQuery('');
+
+  const { handleOpenCoinModal } = useCoinModal();
 
   const fetchedData = data?.data;
 
@@ -23,7 +23,7 @@ export const PageContent = () => {
       <Grid.Container>
         {isFetching && <Loading />}
         {fetchedData?.coins.map((coin) => (
-          <Grid xl={6} lg={8} md={12} sm={24} xs={24}>
+          <Grid xl={6} lg={8} md={12} sm={24} xs={24} key={coin.uuid}>
             <Card shadow hoverable margin={2} width={100}>
               <Avatar src={coin.iconUrl} />
               <Spacer h={1} />
@@ -34,7 +34,7 @@ export const PageContent = () => {
                   content={coin.price}
                 />
                 <Spacer h={1} />
-                <Button onClick={() => dispatch(openModal())} auto>
+                <Button onClick={() => handleOpenCoinModal(coin.uuid)} auto>
                   Details
                 </Button>
               </Card.Footer>
