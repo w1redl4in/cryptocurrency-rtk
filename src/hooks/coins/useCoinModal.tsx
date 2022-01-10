@@ -1,16 +1,16 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { closeModal, handleSaveModalCoin } from '@store/coins/slice';
-import { useGetCryptoQuery } from '@services/endpoints';
-import { AppState, useAppDispatch } from '@store/index';
+import { RootState, useAppDispatch } from '@store/index';
+import { useGetCoinsQuery } from '@services/apis/coinranking/endpoints/coins';
 export const useCoinModal = () => {
   const dispatch = useAppDispatch();
 
   const { coinDetailsModalIsOpen, coin: savedCoin } = useSelector(
-    (state: AppState) => state.coin
+    (state: RootState) => state.coin
   );
 
-  const { data } = useGetCryptoQuery();
+  const { data } = useGetCoinsQuery();
 
   const fetchedData = data?.data;
 

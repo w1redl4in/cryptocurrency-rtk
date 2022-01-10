@@ -1,6 +1,7 @@
 import { Text, Tabs, Display, Image, Page } from '@geist-ui/react';
 import { Dashboard } from '@components/Dashboard';
 import { ToggleTheme } from './ToggleTheme';
+import { Cryptocurrencies } from '@components/Cryptocurrencies';
 
 export const Navbar = () => {
   const tabs = [
@@ -13,7 +14,8 @@ export const Navbar = () => {
     {
       label: 'Cryptocurrencies',
       value: 'Cryptocurrencies',
-      disabled: true,
+      Component: Cryptocurrencies,
+      disabled: false,
     },
     {
       label: 'Exchanges',
@@ -31,7 +33,7 @@ export const Navbar = () => {
     <Page.Header>
       <ToggleTheme />
       <Display caption={<Text h2>Cryptocurrency</Text>}>
-        <Image width="100px" src="/nft.svg" />
+        <Image width="100px" src="/nft.svg" alt="nft image" />
       </Display>
       <Tabs hideDivider initialValue="Dashboard">
         {tabs.map((tab) => (

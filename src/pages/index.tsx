@@ -1,3 +1,4 @@
+import { ApplicationModals } from '@components/Modals';
 import { Navbar } from '@components/Navbar';
 import { CssBaseline, GeistProvider, Page } from '@geist-ui/react';
 import { useSelector } from 'react-redux';
@@ -10,6 +11,7 @@ export default function Dashboard() {
       <CssBaseline />
       <Page>
         <Navbar />
+        <ApplicationModals />
       </Page>
     </GeistProvider>
   );

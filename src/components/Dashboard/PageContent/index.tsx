@@ -1,46 +1,66 @@
 import {
   Page,
   Loading,
-  Avatar,
   Grid,
-  Card,
   Text,
   Description,
   Spacer,
-  Button,
 } from '@geist-ui/react';
-import { useCoinModal } from '@hooks/coins/useCoinModal';
-import { useGetCryptoQuery } from '@services/endpoints';
+import { useGetCoinsQuery } from '@services/apis/coinranking/endpoints/coins';
 export const PageContent = () => {
-  const { isFetching, data } = useGetCryptoQuery();
-
-  const { handleOpenCoinModal } = useCoinModal();
+  const { isFetching, data } = useGetCoinsQuery();
 
   const fetchedData = data?.data;
 
   return (
     <Page.Content>
-      <Grid.Container>
-        {isFetching && <Loading />}
-        {fetchedData?.coins.map((coin) => (
-          <Grid xl={6} lg={8} md={12} sm={24} xs={24} key={coin.uuid}>
-            <Card shadow hoverable margin={2} width={100}>
-              <Avatar src={coin.iconUrl} />
-              <Spacer h={1} />
-              <Text b>{coin.name}</Text>
-              <Card.Footer>
-                <Description
-                  title={<Text>Rank {coin.rank}</Text>}
-                  content={coin.price}
-                />
-                <Spacer h={1} />
-                <Button onClick={() => handleOpenCoinModal(coin.uuid)} auto>
-                  Details
-                </Button>
-              </Card.Footer>
-            </Card>
-          </Grid>
-        ))}
+      {isFetching && <Loading />}
+      <Grid.Container direction="column" alignItems="center">
+        <Grid.Container
+          direction="row"
+          alignItems="center"
+          justify="space-between"
+        >
+          <Description
+            title={
+              <Text h3 type="success">
+                Total Cryptocurrencies
+              </Text>
+            }
+            content={<Text h4>{fetchedData?.stats.totalCoins}</Text>}
+          />
+          <Description
+            title={
+              <Text h3 type="success">
+                Total Exchanges
+              </Text>
+            }
+            content={<Text h4>{fetchedData?.stats.totalExchanges}</Text>}
+          />
+        </Grid.Container>
+        <Spacer w={5} />
+        <Grid.Container
+          direction="row"
+          alignItems="center"
+          justify="space-between"
+        >
+          <Description
+            title={
+              <Text h3 type="success">
+                Total Market Cap
+              </Text>
+            }
+            content={<Text h4>{fetchedData?.stats.totalMarketCap}</Text>}
+          />
+          <Description
+            title={
+              <Text h3 type="success">
+                Total 24h Volume
+              </Text>
+            }
+            content={<Text h4>{fetchedData?.stats.total24hVolume}</Text>}
+          />
+        </Grid.Container>
       </Grid.Container>
     </Page.Content>
   );
