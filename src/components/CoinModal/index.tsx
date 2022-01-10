@@ -3,8 +3,8 @@ import {
   Image,
   Spacer,
   Description,
-  Capacity,
   Text,
+  Badge,
 } from '@geist-ui/react';
 import { useCoinModal } from '@hooks/coins/useCoinModal';
 export const CoinModal = () => {
@@ -20,8 +20,8 @@ export const CoinModal = () => {
       <Modal.Subtitle>{savedCoin?.name}</Modal.Subtitle>
       <Modal.Content>
         <Description
-          title="tier"
-          content={<Capacity color={savedCoin?.color} value={100} />}
+          title="color"
+          content={<Badge style={{ backgroundColor: savedCoin?.color }} />}
         />
         <Spacer h={1} />
         <Description title="BTC Price" content={savedCoin?.btcPrice} />
