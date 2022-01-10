@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { cryptoApi } from '@services/cryptoApi';
+import { fetchCoinByUuid, getCoins } from '@services/endpoints';
 import theme from '@store/theme/slices';
 import coin from '@store/coins/slice';
 export default configureStore({
   reducer: {
-    [cryptoApi.reducerPath]: cryptoApi.reducer,
+    [getCoins.reducerPath]: getCoins.reducer,
+    [fetchCoinByUuid.reducerPath]: fetchCoinByUuid.reducer,
     theme,
     coin,
   },
