@@ -1,34 +1,35 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal } from '@store/coins/slice';
-import { useGetCoinQuery } from '@services/endpoints';
+import { closeModal, handleSaveModalCoin } from '@store/coins/slice';
+import { useGetCryptoQuery } from '@services/endpoints';
+import { AppState } from '@store/index';
 export const useCoinModal = () => {
-  const [coinUuid, setCoinUuid] = useState<string>();
-
   const dispatch = useDispatch();
 
-  const { coinDetailsModalIsOpen } = useSelector((state: any) => state.coin);
+  const { coinDetailsModalIsOpen, coin: savedCoin } = useSelector(
+    (state: AppState) => state.coin
+  );
+
+  const { data } = useGetCryptoQuery('');
+
+  const fetchedData = data?.data;
 
   const handleOpenCoinModal = useCallback(
     (id: string) => {
-      setCoinUuid(id);
-      dispatch(openModal());
+      dispatch(
+        handleSaveModalCoin({ coinUuid: id, coins: fetchedData?.coins })
+      );
     },
-    [dispatch]
+    [dispatch, fetchedData?.coins]
   );
   const handleCloseCoinModal = useCallback(() => {
     dispatch(closeModal());
   }, [dispatch]);
 
-  const { isFetching, data } = useGetCoinQuery(coinUuid);
-
   return {
     coinDetailsModalIsOpen,
     handleOpenCoinModal,
     handleCloseCoinModal,
-    coin: {
-      isFetching,
-      data,
-    },
+    savedCoin,
   };
 };

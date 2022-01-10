@@ -1,27 +1,58 @@
-import { Loading, Modal } from '@geist-ui/react';
+import {
+  Modal,
+  Image,
+  Spacer,
+  Description,
+  Capacity,
+  Text,
+} from '@geist-ui/react';
 import { useCoinModal } from '@hooks/coins/useCoinModal';
 export const CoinModal = () => {
-  const { coinDetailsModalIsOpen, handleCloseCoinModal, coin } = useCoinModal();
-
-  const { isFetching, data } = coin;
-
-  console.log('coin', isFetching, data);
+  const { coinDetailsModalIsOpen, handleCloseCoinModal, savedCoin } =
+    useCoinModal();
 
   return (
     <Modal visible={coinDetailsModalIsOpen} onClose={handleCloseCoinModal}>
-      {isFetching ? (
-        <Loading />
-      ) : (
-        <>
-          <Modal.Title>Nome da moeda</Modal.Title>
-          <Modal.Subtitle>Info da moeda</Modal.Subtitle>
-          <Modal.Content>Informações detalhadas</Modal.Content>
-          <Modal.Action>Submit</Modal.Action>
-          <Modal.Action passive onClick={handleCloseCoinModal}>
-            Cancel
-          </Modal.Action>
-        </>
-      )}
+      <Modal.Title>
+        <Image width={5} src={savedCoin?.iconUrl} alt="coin image" />
+      </Modal.Title>
+      <Spacer w={1} />
+      <Modal.Subtitle>{savedCoin?.name}</Modal.Subtitle>
+      <Modal.Content>
+        <Description
+          title="tier"
+          content={<Capacity color={savedCoin?.color} value={100} />}
+        />
+        <Spacer h={1} />
+        <Description title="BTC Price" content={savedCoin?.btcPrice} />
+        <Spacer h={1} />
+        <Description
+          title="Low Volume"
+          content={savedCoin?.lowVolume ? 'YES' : 'NO'}
+        />
+        <Spacer h={1} />
+        <Description title="Market Cap" content={savedCoin?.marketCap} />
+        <Spacer h={1} />
+        <Description
+          title="change"
+          content={
+            String(savedCoin?.change).includes('-') ? (
+              <Text b type="error">
+                {savedCoin?.change}
+              </Text>
+            ) : (
+              <Text b type="success">
+                {savedCoin?.change}
+              </Text>
+            )
+          }
+        />
+        <Spacer h={1} />
+        <Description title="24h Volume" content={savedCoin['24hVolume']} />
+      </Modal.Content>
+      <Modal.Action passive onClick={handleCloseCoinModal}>
+        Close
+      </Modal.Action>
     </Modal>
   );
 };
