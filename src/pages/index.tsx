@@ -1,4 +1,3 @@
-import { Footer } from '@components/Footer';
 import { ApplicationModals } from '@components/Modals';
 import { Navbar } from '@components/Navbar';
 import {
@@ -20,7 +19,6 @@ export default function Dashboard() {
       <Page style={{ padding: isMobile ? 0 : 'auto' }}>
         <Navbar />
         <ApplicationModals />
-        <Footer />
       </Page>
     </GeistProvider>
   );

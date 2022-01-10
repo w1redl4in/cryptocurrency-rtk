@@ -12,6 +12,8 @@ import { Cryptocurrencies } from '@components/Cryptocurrencies';
 import { Exchanges } from '@components/Exchanges';
 
 export const Navbar = () => {
+  const isMobile = useMediaQuery('mobile');
+
   const tabs = [
     {
       label: 'Dashboard',
@@ -46,7 +48,7 @@ export const Navbar = () => {
           <Image width="100px" src="/nft.svg" alt="nft image" />
         </Display>
       </Page.Header>
-      <Tabs hideDivider initialValue="Dashboard">
+      <Tabs hideDivider={!isMobile} initialValue="Dashboard">
         {tabs.map((tab) => (
           <Tabs.Item
             disabled={tab.disabled}

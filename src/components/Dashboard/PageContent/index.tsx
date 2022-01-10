@@ -28,7 +28,7 @@ export const PageContent = () => {
         >
           <Description
             title={
-              <Text h3={!isMobile} h4={isMobile} type="success">
+              <Text h3={!isMobile} h5={isMobile} type="success">
                 Total Cryptocurrencies
               </Text>
             }
@@ -56,7 +56,7 @@ export const PageContent = () => {
                 Total 24h Volume
               </Text>
             }
-            content={<Text h4>{fetchedData?.stats.total24hVolume}</Text>}
+            content={<Text h5>{fetchedData?.stats.total24hVolume}</Text>}
           />
         </Grid.Container>
       )}
