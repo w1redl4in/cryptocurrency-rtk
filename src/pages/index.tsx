@@ -1,3 +1,4 @@
+import { Footer } from '@components/Footer';
 import { ApplicationModals } from '@components/Modals';
 import { Navbar } from '@components/Navbar';
 import { CssBaseline, GeistProvider, Page } from '@geist-ui/react';
@@ -12,6 +13,7 @@ export default function Dashboard() {
       <Page>
         <Navbar />
         <ApplicationModals />
+        <Footer />
       </Page>
     </GeistProvider>
   );
