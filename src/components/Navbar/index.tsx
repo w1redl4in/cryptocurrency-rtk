@@ -34,7 +34,7 @@ export const Navbar = () => {
   return (
     <Page.Header>
       <ToggleTheme />
-      <Display caption={<Text h2>Cryptocurrency</Text>}>
+      <Display caption={<Text h2>CryptoVerse</Text>}>
         <Image width="100px" src="/nft.svg" alt="nft image" />
       </Display>
       <Tabs hideDivider initialValue="Dashboard">
